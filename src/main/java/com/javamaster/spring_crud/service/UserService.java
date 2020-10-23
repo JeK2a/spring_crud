@@ -13,8 +13,10 @@ public class UserService {
 
     @Autowired
     private UserEntityRepository userEntityRepository;
+
     @Autowired
     private RoleEntityRepository roleEntityRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -22,6 +24,7 @@ public class UserService {
         RoleEntity userRole = roleEntityRepository.findByName("ROLE_USER");
         userEntity.setRoleEntity(userRole);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+
         return userEntityRepository.save(userEntity);
     }
 
@@ -36,6 +39,7 @@ public class UserService {
                 return userEntity;
             }
         }
+
         return null;
     }
 }

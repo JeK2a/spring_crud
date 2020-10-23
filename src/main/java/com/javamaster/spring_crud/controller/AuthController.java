@@ -21,10 +21,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@org.jetbrains.annotations.NotNull @RequestBody @Valid RegistrationRequest registrationRequest) {
-        UserEntity u = new UserEntity();
-        u.setPassword(registrationRequest.getPassword());
-        u.setLogin(registrationRequest.getLogin());
-        userService.saveUser(u);
+        UserEntity user = new UserEntity();
+        user.setLogin(registrationRequest.getLogin());
+        user.setPassword(registrationRequest.getPassword());
+        userService.saveUser(user);
+
         return "OK";
     }
 
@@ -32,6 +33,7 @@ public class AuthController {
     public AuthResponse auth(@RequestBody AuthRequest request) {
         UserEntity userEntity = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(userEntity.getLogin());
+
         return new AuthResponse(token);
     }
 }

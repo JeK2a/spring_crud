@@ -3,26 +3,30 @@ $(document).ready(function () {
 });
 
 function showUsers(users) {
-    let html = '<tr>\n' +
-        '        <th class="col">User id</th>\n' +
-        '        <th class="col">User name</th>\n' +
-        '        <th class="col">User login</th>\n' +
-        '        <th class="col">User email</th>\n' +
-        '        <th class="col">Delete</th>\n' +
-        '    </tr>';
+    let html =
+        '<tr>\n' +
+        '    <th class="col">User id</th>\n'    +
+        '    <th class="col">User name</th>\n'  +
+        '    <th class="col">User login</th>\n' +
+        '    <th class="col">User email</th>\n' +
+        '    <th class="col">Delete</th>\n' +
+        '</tr>\n';
 
     console.table(users);
 
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
-        html = html + '<tr><td>' + user.id + '</td>\n' +
-            '        <td>' + user.name + '</td>\n' +
-            '        <td>' + user.login + '</td>\n' +
-            '        <td>' + user.email + '</td>' +
-            '        <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td></tr>';
+        html +=
+            '<tr>\n' +
+            '   <td>' + user.id    + '</td>\n' +
+            '   <td>' + user.name  + '</td>\n' +
+            '   <td>' + user.login + '</td>\n' +
+            '   <td>' + user.email + '</td>\n' +
+            '   <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td>\n' +
+            '</tr>';
     }
 
-    document.getElementById("usersList").innerHTML = html;
+    $("#usersList").innerHTML = html;
 }
 
 function loadUsers() {
@@ -39,14 +43,24 @@ function loadUsers() {
 }
 
 function createUser() {
-    let userName  = document.getElementById("user_name").value;
-    let userLogin = document.getElementById("user_login").value;
-    let userEmail = document.getElementById("user_email").value;
+    // let userName  = document.getElementById("user_name").value;
+    // let userLogin = document.getElementById("user_login").value;
+    // let userEmail = document.getElementById("user_email").value;
+
+    let userName  = $("#user_name").val();
+    let userLogin = $("#user_login").val();
+    let userEmail = $("#user_email").val();
 
     let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
     xmlhttp.open("POST", "/users/save");
     xmlhttp.setRequestHeader("Content-Type", "application/json");
-    xmlhttp.send(JSON.stringify({name: userName, login: userLogin, email: userEmail}));
+    xmlhttp.send(JSON.stringify(
+        {
+            name: userName,
+            login: userLogin,
+            email: userEmail
+        }
+    ));
 
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {

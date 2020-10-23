@@ -1,23 +1,27 @@
 package com.javamaster.spring_crud.service;
 
-import com.javamaster.spring_crud.dto.UsersDto;
-import com.javamaster.spring_crud.entity.Users;
+import com.javamaster.spring_crud.dto.UserDto;
+import com.javamaster.spring_crud.entity.UserEntity;
+//import com.javamaster.spring_crud.entity.Users;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UsersConverter {
 
-    public Users fromUserDtoToUser(UsersDto usersDto) {
-        Users users = new Users();
-        users.setId(usersDto.getId());
-        users.setEmail(usersDto.getEmail());
-        users.setName(usersDto.getName());
-        users.setLogin(usersDto.getLogin());
+    public UserEntity fromUserDtoToUser(UserDto userDto) {
+        UserEntity user = new UserEntity();
+        user.setId(userDto.getId());
+        user.setEmail(userDto.getEmail());
+        user.setName(userDto.getName());
+        user.setLogin(userDto.getLogin());
 
-        return users;
+        return user;
     }
 
-    public UsersDto fromUserToUserDto(Users users) {
+    public UserDto fromUserToUserDto(UserEntity user) {
 //        return UsersDto.builder()
 //                .id(users.getId())
 //                .email(users.getEmail())
@@ -26,12 +30,24 @@ public class UsersConverter {
 //                .build();
 
 
-        UsersDto usersDto = new UsersDto();
-        usersDto.setId(users.getId());
-        usersDto.setEmail(users.getEmail());
-        usersDto.setName(users.getName());
-        usersDto.setLogin(users.getLogin());
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setEmail(user.getEmail());
+        userDto.setName(user.getName());
+        userDto.setLogin(user.getLogin());
 
-        return usersDto;
+        return userDto;
+    }
+
+    public List<UserDto> fromUsersToUsersDto(List<UserEntity> userEntityList) {
+        return userEntityList.stream()
+                .map(this::fromUserToUserDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<UserEntity> fromUsersDtoToUsers(List<UserDto> userEntityList) {
+        return userEntityList.stream()
+                .map(this::fromUserDtoToUser)
+                .collect(Collectors.toList());
     }
 }

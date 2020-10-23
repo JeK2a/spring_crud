@@ -1,24 +1,28 @@
 package com.javamaster.spring_crud.dto;
 
 import com.javamaster.spring_crud.exception.ValidationException;
-import lombok.Builder;
 import lombok.Data;
+
+import java.sql.Date;
 
 import static java.util.Objects.isNull;
 
 @Data
-public class UsersDto {
+public class UserDto {
 
     private Integer id;
     private String name;
+    private String surname;
     private String login;
+    private String phone;
     private String email;
+    private Date birthday;
 
-    private void validateUserDto(UsersDto usersDto) throws ValidationException {
-        if (isNull(usersDto)) {
+    private void validateUserDto(UserDto userDto) throws ValidationException {
+        if (isNull(userDto)) {
             throw new ValidationException("Object user is null");
         }
-        if (isNull(usersDto.getLogin()) || usersDto.getLogin().isEmpty()) {
+        if (isNull(userDto.getLogin()) || userDto.getLogin().isEmpty()) {
             throw new ValidationException("Login is empty");
         }
     }
@@ -39,6 +43,14 @@ public class UsersDto {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -47,11 +59,27 @@ public class UsersDto {
         this.login = login;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }
