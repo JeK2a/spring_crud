@@ -16,6 +16,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" value="9ad8e78f-92e7-47c4-9b7c-572ffde9c72f" />
+          <factory-entry name="spring_crud" />
         </datasource-mapping>
         <naming-strategy-map>
           <unit-entry name="entityManagerFactory" />
