@@ -79,7 +79,8 @@ public class DefaultUsersService implements UsersService {
 
     @Override
     public List<UserDto> findAll() {
-        return usersRepository.findAll()
+        return usersRepository
+                .findAll()
                 .stream()
                 .map(usersConverter::fromUserToUserDto)
                 .collect(Collectors.toList());

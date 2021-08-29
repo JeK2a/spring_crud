@@ -11,12 +11,12 @@ import static java.util.Objects.isNull;
 public class UserDto {
 
     private Integer id;
-    private String name;
-    private String surname;
-    private String login;
-    private String phone;
-    private String email;
-    private Date birthday;
+    private String  name;
+    private String  surname;
+    private String  login;
+    private String  phone;
+    private String  email;
+    private Date    birthday;
 
     private void validateUserDto(UserDto userDto) throws ValidationException {
         if (isNull(userDto)) {
